@@ -8,7 +8,7 @@ import {
   Collapse,
   Icon,
   Image,
-  Link,
+  Link as ChakaraLink,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -87,7 +87,7 @@ export default function Navbar() {
           >
             Sign In
           </Button>
-          <NavLink to="/register">
+          <NavLink to="/signup">
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
@@ -122,7 +122,7 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
+              <ChakaraLink
                 p={2}
                 href={navItem.href ?? '#'}
                 fontSize={'sm'}
@@ -134,7 +134,7 @@ const DesktopNav = () => {
                 }}
               >
                 {navItem.label}
-              </Link>
+              </ChakaraLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -162,7 +162,7 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
-    <Link
+    <ChakaraLink
       href={href}
       role={'group'}
       display={'block'}
@@ -193,7 +193,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
-    </Link>
+    </ChakaraLink>
   );
 };
 
@@ -218,7 +218,7 @@ const MobileNavItem = ({ label, children, href }) => {
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
+        as={ChakaraLink}
         href={href ?? '#'}
         justify={'space-between'}
         align={'center'}
@@ -254,9 +254,9 @@ const MobileNavItem = ({ label, children, href }) => {
         >
           {children &&
             children.map(child => (
-              <Link key={child.label} py={2} href={child.href}>
+              <ChakaraLink key={child.label} py={2} href={child.href}>
                 {child.label}
-              </Link>
+              </ChakaraLink>
             ))}
         </Stack>
       </Collapse>
