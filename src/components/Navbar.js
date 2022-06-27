@@ -15,6 +15,13 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  MenuList,
+  Avatar,
+  Center,
+  MenuItem,
+  MenuButton,
+  Menu,
+  MenuDivider,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -22,12 +29,21 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
-
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import Logo from '../img/Logo.png';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
+  const { currentUser, logout } = useAuth();
   const { isOpen, onToggle } = useDisclosure();
+
+  const logoutButtonClicked = async () => {
+    localStorage.removeItem('username');
+    await logout();
+    window.location.reload();
+  };
 
   return (
     <Box>
@@ -68,50 +84,86 @@ export default function Navbar() {
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-            <DesktopNav />
+            <DesktopNav currentUser={currentUser} />
           </Flex>
         </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-        >
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={'/login'}
-          >
-            Sign In
-          </Button>
-          <NavLink to="/signup">
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'blue.500'}
-              _hover={{
-                bg: 'blue.400',
-              }}
+        <ColorModeSwitcher />
+        {currentUser ? (
+          <Menu>
+            <MenuButton
+              as={Button}
+              rounded={'full'}
+              variant={'link'}
+              cursor={'pointer'}
+              minW={0}
             >
-              Sign Up
+              <Avatar
+                size={'sm'}
+                src={'https://avatars.dicebear.com/api/male/username.svg'}
+              />
+            </MenuButton>
+            <MenuList alignItems={'center'}>
+              <br />
+              <Center>
+                <Avatar
+                  size={'2xl'}
+                  src={'https://avatars.dicebear.com/api/male/username.svg'}
+                />
+              </Center>
+              <br />
+              <Center>
+                <p>Username</p>
+              </Center>
+              <br />
+              <MenuDivider />
+              <MenuItem>Your Servers</MenuItem>
+              <MenuItem>Account Settings</MenuItem>
+              <MenuItem onClick={logoutButtonClicked}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={'flex-end'}
+            direction={'row'}
+            spacing={6}
+          >
+            <Button
+              as={'a'}
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+              href={'/login'}
+            >
+              Sign In
             </Button>
-          </NavLink>
-        </Stack>
+            <NavLink to="/signup">
+              <Button
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'blue.500'}
+                _hover={{
+                  bg: 'blue.400',
+                }}
+              >
+                Sign Up
+              </Button>
+            </NavLink>
+          </Stack>
+        )}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav currentUser={currentUser} />
       </Collapse>
     </Box>
   );
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({ currentUser }) => {
+  const NAV_ITEMS = currentUser ? NAV_ITEMS_LOGGED_IN : NAV_ITEMS_NO_LOGIN;
   const linkColor = useColorModeValue('gray.600', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
@@ -197,7 +249,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav = ({ currentUser }) => {
+  const NAV_ITEMS = currentUser ? NAV_ITEMS_LOGGED_IN : NAV_ITEMS_NO_LOGIN;
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
@@ -271,14 +324,14 @@ class NavItem {
   href;
 }
 
-const NAV_ITEMS = [
+const NAV_ITEMS_LOGGED_IN = [
   {
     label: 'My Classes',
     children: [
       {
         label: 'Math',
         subLabel: '',
-        href: '#',
+        href: '/myclasses',
       },
       {
         label: 'Science',
@@ -286,6 +339,7 @@ const NAV_ITEMS = [
         href: '#',
       },
     ],
+    href: '/myclasses',
   },
   {
     label: 'My Shares',
@@ -302,6 +356,17 @@ const NAV_ITEMS = [
       },
     ],
   },
+  {
+    label: 'Contact us',
+    href: '#',
+  },
+  {
+    label: 'FAQ',
+    href: '#',
+  },
+];
+
+const NAV_ITEMS_NO_LOGIN = [
   {
     label: 'Contact us',
     href: '#',

@@ -8,8 +8,10 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(
+    localStorage.getItem('username')
+  );
+  const [loadingPage, setLoadingPage] = useState(true);
 
   const signup = async (username, email, password, role) => {
     const user = {
@@ -40,37 +42,66 @@ export function AuthProvider({ children }) {
     const request = await fetch('/api/v1/auth/login', {
       headers: {
         Authorization: `Basic ${window.btoa(username + ':' + password)}`,
+        'X-Requested-With': 'XMLHttpRequest',
       },
       method: 'POST',
     });
-    const data = await request.json();
-    if (data.status === 200) {
+
+    if (request.status === 200) {
+      const data = await request.json();
+      localStorage.setItem('username', username);
       setCurrentUser({ username });
       return data;
+    } else {
+      localStorage.removeItem('username');
+      setCurrentUser(null);
     }
   };
 
-  const value = {
-    currentUser,
-    signup,
-    login,
+  const logout = async () => {
+    try {
+      const request = await fetch('/api/v1/auth/logout');
+      const data = await request.json();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const request = await fetch('/api/v1/auth/login', {
-  //       headers: { 'content-type': 'application/json' },
-  //       method: 'POST',
-  //     });
-  //     const data = await request.json();
-  //     setCurrentUser(data);
-  //     setLoading(false);
-  //   };
-  //   try {
-  //     fetchUser();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const request = await fetch('/api/v1/auth/login', {
+        headers: { 'content-type': 'application/json' },
+        method: 'POST',
+      });
+
+      if (request.status === 200) {
+        const data = await request.json();
+        setLoadingPage(false);
+        return;
+      } else if (request.status === 401) {
+        localStorage.removeItem('username');
+        setCurrentUser(null);
+        setLoadingPage(false);
+        return;
+      }
+    };
+    try {
+      fetchUser();
+    } catch (error) {
+      setLoadingPage(false);
+    }
+  }, []);
+
+  const value = {
+    currentUser,
+    setCurrentUser,
+    signup,
+    login,
+    logout,
+    loadingPage,
+  };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+export default AuthContext;

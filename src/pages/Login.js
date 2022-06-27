@@ -15,17 +15,19 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  useToast,
 } from '@chakra-ui/react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
-  const { login, currentUser } = useAuth();
+  const { login, currentUser, setCurrentUser } = useAuth();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
   const usernameRef = useRef();
   const passwordRef = useRef();
 
@@ -44,7 +46,21 @@ export default function Login() {
 
       if (response) {
         setIsLoading(false);
-        return navigate('/');
+        setCurrentUser({ username: usernameRef.current.value });
+        navigate('/');
+        toast({
+          title: 'Logged in.',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
+      } else {
+        setIsLoading(false);
+        toast({
+          title: 'username or password are not correct',
+          status: 'error',
+          isClosable: true,
+        });
       }
     } catch (error) {
       setIsLoading(false);
@@ -52,6 +68,12 @@ export default function Login() {
       return setError('failed to login!');
     }
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <>

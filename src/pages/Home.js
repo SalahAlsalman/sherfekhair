@@ -9,8 +9,10 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
+  const { currentUser } = useAuth();
   return (
     <>
       <Navbar />
@@ -44,16 +46,20 @@ export default function Home() {
               and improves the learning experience.
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-              <Button
-                rounded={'full'}
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-              >
-                <Link to="/login">Sign in</Link>
-              </Button>
+              {currentUser ? (
+                ''
+              ) : (
+                <Button
+                  rounded={'full'}
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }}
+                >
+                  <Link to="/login">Sign in</Link>
+                </Button>
+              )}
               <Button rounded={'full'}>How It Works</Button>
             </Stack>
           </Stack>
