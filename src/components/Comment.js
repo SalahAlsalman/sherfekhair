@@ -22,11 +22,23 @@ const Comment = ({ message, messageDate, username }) => {
         textAlign={'center'}
       >
         <VStack>
-          <HStack w='full' alignItems='center' spacing={4}>
-            <Text fontWeight={600} color={useColorModeValue('gray.700', 'gray.400')}>
+          <HStack w="full" alignItems="center" spacing={4}>
+            <Text
+              fontWeight={600}
+              color={useColorModeValue('gray.700', 'gray.400')}
+              display={'flex'}
+            >
+              <Text textDecoration='underline' fontFamily="200" fontSize={'sm'} mr={3}>
+                Posted by:
+              </Text>
               @{username}
             </Text>
-            <Text textDecoration='underline' fontSize={11} fontWeight={600} color={useColorModeValue('gray.700', 'gray.400')}>
+            <Text
+              textDecoration="underline"
+              fontSize={11}
+              fontWeight={600}
+              color={useColorModeValue('gray.700', 'gray.400')}
+            >
               {/\d{4}-\d{2}-\d{2}/.exec(messageDate)[0]}
             </Text>
           </HStack>
@@ -39,7 +51,7 @@ const Comment = ({ message, messageDate, username }) => {
           </Text>
         </VStack>
 
-        <Stack borderColor='white' mt={8} direction={'row'} spacing={4}>
+        <Stack borderColor="white" mt={8} direction={'row'} spacing={4}>
           <Button
             flex={1}
             fontSize={'sm'}

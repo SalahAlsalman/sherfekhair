@@ -22,7 +22,6 @@ import {
 } from '@chakra-ui/react';
 import { useState, useRef } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import Navbar from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -71,7 +70,6 @@ export default function Signup() {
 
   return (
     <>
-      <Navbar />
       <Flex
         minH={'100vh'}
         align={'center'}

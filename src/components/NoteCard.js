@@ -65,6 +65,13 @@ export default function NoteCard({
     onClose();
   };
 
+  const onCloseButtonClick = () => {
+    setReplyClicked(false);
+    onClose();
+  };
+
+  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -97,23 +104,21 @@ export default function NoteCard({
               right: 3,
             }}
           />
-          <VStack w="full" alignItems="center" spacing={4}>
-            <Heading
-              fontSize={'xl'}
-              fontFamily={'body'}
-            >
+          <HStack
+            w="full"
+            alignItems="center"
+            justifyContent="left"
+            spacing={4}
+          >
+            <Heading fontSize={'xl'} fontFamily={'body'}>
               {title}
             </Heading>
-            <Text >
-              {/\d{4}-\d{2}-\d{2}/.exec(messageDate)[0]}
+            
+          </HStack>
+          <Text my={6}>{/\d{4}-\d{2}-\d{2}/.exec(messageDate)[0]}</Text>
+            <Text fontWeight={600} mb={4}>
+              Posted by: @{username}
             </Text>
-            <Text
-              fontWeight={600}
-              mb={4}
-            >
-              @{username}
-            </Text>
-          </VStack>
 
           <Stack mt={8} direction={'row'} spacing={4}>
             <Button
@@ -143,37 +148,33 @@ export default function NoteCard({
           variant="wide"
           closeOnOverlayClick={false}
           isOpen={isOpen}
-          onClose={onClose}
+          onClose={onCloseButtonClick}
         >
           <ModalOverlay
             bg="blackAlpha.300"
             backdropFilter="blur(6px) hue-rotate(20deg)"
           />
           <ModalContent width="100%">
-            <ModalHeader >
-              {title}
-            </ModalHeader>
+            <ModalHeader>{title}</ModalHeader>
             <ModalCloseButton />
             <ModalBody px={0} pt={0} pb={6}>
               <HStack spacing={2} height={title.length * 5}>
-                <Text  m={5}>
-                  {body}
-                </Text>
+                <Text m={5}>{body}</Text>
               </HStack>
               {comments.length > 0 ? (
                 <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-                {comments.map((comment, index) => {
-                  return (
-                    <GridItem key={index} w="100%" h="100%">
-                    <Comment
-                      key={index}
-                      message={comment.message}
-                      messageDate={comment.messageDate}
-                      username={comment.user.username}
-                    />
-                    </GridItem>
-                  );
-                })}
+                  {comments.map((comment, index) => {
+                    return (
+                      <GridItem key={index} w="100%" h="100%">
+                        <Comment
+                          key={index}
+                          message={comment.message}
+                          messageDate={comment.messageDate}
+                          username={comment.user.username}
+                        />
+                      </GridItem>
+                    );
+                  })}
                 </Grid>
               ) : (
                 <></>

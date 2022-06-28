@@ -1,7 +1,7 @@
-import { Grid, GridItem, HStack, Text } from '@chakra-ui/react';
+import { Grid, GridItem, HStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import AddClassModal from '../components/AddClassModal';
 import ClassCard from '../components/ClassCard';
-import Navbar from '../components/Navbar';
 import NoClasses from '../components/NoClasses';
 
 const MyClasses = () => {
@@ -27,7 +27,7 @@ const MyClasses = () => {
 
   return (
     <>
-      <Navbar />
+      <AddClassModal />
       {myclasses.length > 0 ? (
         <HStack spacing={5} margin={5}>
           <Grid templateColumns="repeat(3, 1fr)" gap={6}>

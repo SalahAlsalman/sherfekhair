@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import SessionCard from '../components/SessionCard';
 import { HStack, Grid, GridItem } from '@chakra-ui/react';
-import NoSessions from '../components/NoSessions';
+import NoClasses from '../components/NoClasses';
 
 const MyClass = () => {
   const param = useParams();
@@ -13,7 +12,6 @@ const MyClass = () => {
     const fetchSessionsFromAPI = async () => {
       const request = await fetch('/api/v1/session/' + param.id);
       const data = await request.json();
-      console.log(data.message);
       setSessions(data.message);
     };
     try {
@@ -24,7 +22,6 @@ const MyClass = () => {
   }, []);
   return (
     <>
-      <Navbar />
       {sessions.length > 0 ? (
         <HStack spacing={5} margin={5}>
           <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -38,7 +35,7 @@ const MyClass = () => {
           </Grid>
         </HStack>
       ) : (
-        <NoSessions />
+        <NoClasses />
       )}
     </>
   );

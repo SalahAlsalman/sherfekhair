@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import React, { useState, useContext, useEffect } from 'react';
 
 const AuthContext = React.createContext();
@@ -67,7 +66,7 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       const request = await fetch('/api/v1/auth/logout');
-      const data = await request.json();
+      await request.json();
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +80,7 @@ export function AuthProvider({ children }) {
       });
 
       if (request.status === 200) {
-        const data = await request.json();
+        await request.json();
         setLoadingPage(false);
         return;
       } else if (request.status === 401) {

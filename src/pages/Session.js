@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
 import { useParams } from 'react-router-dom';
 import NoteCard from '../components/NoteCard';
 import { Grid, HStack, GridItem } from '@chakra-ui/react';
+import NoSessions from '../components/NoSessions';
 const Session = () => {
   const param = useParams();
   const [notes, setNotes] = useState([]);
@@ -22,7 +22,6 @@ const Session = () => {
   }, []);
   return (
     <>
-      <Navbar />
       {notes.length > 0 ? (
         <HStack spacing={5} margin={5}>
           <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -44,7 +43,7 @@ const Session = () => {
           </Grid>
         </HStack>
       ) : (
-        <div>Session</div>
+        <NoSessions />
       )}
     </>
   );

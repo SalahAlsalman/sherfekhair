@@ -8,14 +8,12 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
   const { currentUser } = useAuth();
   return (
     <>
-      <Navbar />
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={6} w={'full'} maxW={'lg'}>

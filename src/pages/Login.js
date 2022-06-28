@@ -17,13 +17,12 @@ import {
   AlertDescription,
   useToast,
 } from '@chakra-ui/react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import {  useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
-  const { login, currentUser, setCurrentUser } = useAuth();
+  const { login, currentUser } = useAuth();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -76,7 +75,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
       <Flex
         minH={'100vh'}
         align={'center'}

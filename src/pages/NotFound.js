@@ -1,11 +1,9 @@
 import { Box, Heading, Text, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 
 export default function NotFound() {
   return (
     <>
-      <Navbar />
       <Box textAlign="center" py={10} px={6}>
         <Heading
           display="inline-block"

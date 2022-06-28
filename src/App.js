@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-  Spinner,
-} from '@chakra-ui/react';
+import { ChakraProvider, theme } from '@chakra-ui/react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -22,12 +12,15 @@ import RequireAuth from './components/RequireAuth';
 import MyClasses from './pages/MyClasses';
 import MyClass from './pages/MyClass';
 import Session from './pages/Session';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -40,6 +33,7 @@ function App() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </AuthProvider>
     </ChakraProvider>
