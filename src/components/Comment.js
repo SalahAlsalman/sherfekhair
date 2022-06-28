@@ -6,6 +6,7 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  HStack,
 } from '@chakra-ui/react';
 import { VStack } from '@chakra-ui/react';
 import React from 'react';
@@ -14,23 +15,21 @@ const Comment = ({ message, messageDate, username }) => {
   return (
     <Center py={3}>
       <Box
-        maxW={'320px'}
         w={'full'}
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
-        rounded={'lg'}
         p={6}
         textAlign={'center'}
       >
         <VStack>
-          <Heading fontSize={'2xl'} fontFamily={'body'}>
-            Title
-          </Heading>
-
-          <Text>{/\d{4}-\d{2}-\d{2}/.exec(messageDate)[0]}</Text>
-          <Text fontWeight={600} color={'gray.500'} mb={4}>
-            @{username}
-          </Text>
+          <HStack w='full' alignItems='center' spacing={4}>
+            <Text fontWeight={600} color={useColorModeValue('gray.700', 'gray.400')}>
+              @{username}
+            </Text>
+            <Text textDecoration='underline' fontSize={11} fontWeight={600} color={useColorModeValue('gray.700', 'gray.400')}>
+              {/\d{4}-\d{2}-\d{2}/.exec(messageDate)[0]}
+            </Text>
+          </HStack>
           <Text
             textAlign={'center'}
             color={useColorModeValue('gray.700', 'gray.400')}
@@ -40,13 +39,13 @@ const Comment = ({ message, messageDate, username }) => {
           </Text>
         </VStack>
 
-        <Stack mt={8} direction={'row'} spacing={4}>
-          
+        <Stack borderColor='white' mt={8} direction={'row'} spacing={4}>
           <Button
             flex={1}
             fontSize={'sm'}
             rounded={'full'}
             bg={'blue.400'}
+            maxW={'120px'}
             color={'white'}
             boxShadow={
               '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
@@ -58,7 +57,7 @@ const Comment = ({ message, messageDate, username }) => {
               bg: 'blue.500',
             }}
           >
-            Reply
+            Like
           </Button>
         </Stack>
       </Box>

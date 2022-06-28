@@ -34,7 +34,9 @@ const Session = () => {
                     id={note.id}
                     username={note.user.username}
                     comments={note.comments}
-                    note={note.message}
+                    title={note.title}
+                    body={note.body}
+                    messageDate={note.messageDate}
                   />
                 </GridItem>
               );
