@@ -23,7 +23,7 @@ import {
 import { useState, useRef } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Navbar from '../components/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Signup() {
@@ -35,6 +35,7 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { signup, currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -56,7 +57,10 @@ export default function Signup() {
       );
       if (response) {
         setIsLoading(false);
-        return;
+        return navigate('/');
+      } else {
+        setIsLoading(false);
+        return setError('failed to create account!');
       }
     } catch (error) {
       setIsLoading(false);

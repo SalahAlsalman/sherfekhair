@@ -20,20 +20,26 @@ export function AuthProvider({ children }) {
       password,
       role: role.toLowerCase(),
     };
-    const request = await fetch('/api/v1/auth/register', {
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(user),
-    });
-    const data = await request.json();
-    if (request.status === 201) {
-      setCurrentUser({ username });
-      return data;
-    } else if (request.status === 400) {
-      //return erorr
-    } else {
+    try {
+      const request = await fetch('/api/v1/auth/register', {
+        headers: {
+          'content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(user),
+      });
+      const data = await request.json();
+      if (request.status === 201) {
+        login(username, password);
+        return data;
+      } else if (request.status === 400) {
+        setCurrentUser(null);
+        return;
+      } else {
+        return;
+      }
+    } catch (error) {
+      console.log(error);
       return;
     }
   };

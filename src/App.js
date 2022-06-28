@@ -20,6 +20,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import { AuthProvider } from './context/AuthContext';
 import RequireAuth from './components/RequireAuth';
 import MyClasses from './pages/MyClasses';
+import MyClass from './pages/MyClass';
+import Session from './pages/Session';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route element={<RequireAuth />}>
               <Route path="/myclasses" element={<MyClasses />} />
+              <Route path="/myclass/:id" element={<MyClass />} />
+              <Route path="/session/:id" element={<Session />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

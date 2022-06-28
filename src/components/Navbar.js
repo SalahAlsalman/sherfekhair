@@ -87,7 +87,7 @@ export default function Navbar() {
             <DesktopNav currentUser={currentUser} />
           </Flex>
         </Flex>
-        <ColorModeSwitcher />
+        <ColorModeSwitcher mr={5} />
         {currentUser ? (
           <Menu>
             <MenuButton
@@ -112,11 +112,10 @@ export default function Navbar() {
               </Center>
               <br />
               <Center>
-                <p>Username</p>
+                <p>{localStorage.getItem('username')}</p>
               </Center>
               <br />
               <MenuDivider />
-              <MenuItem>Your Servers</MenuItem>
               <MenuItem>Account Settings</MenuItem>
               <MenuItem onClick={logoutButtonClicked}>Logout</MenuItem>
             </MenuList>
@@ -327,34 +326,7 @@ class NavItem {
 const NAV_ITEMS_LOGGED_IN = [
   {
     label: 'My Classes',
-    children: [
-      {
-        label: 'Math',
-        subLabel: '',
-        href: '/myclasses',
-      },
-      {
-        label: 'Science',
-        subLabel: '',
-        href: '#',
-      },
-    ],
     href: '/myclasses',
-  },
-  {
-    label: 'My Shares',
-    children: [
-      {
-        label: 'My notes',
-        subLabel: '',
-        href: '#',
-      },
-      {
-        label: 'My comments',
-        subLabel: '',
-        href: '#',
-      },
-    ],
   },
   {
     label: 'Contact us',

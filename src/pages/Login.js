@@ -46,7 +46,6 @@ export default function Login() {
 
       if (response) {
         setIsLoading(false);
-        setCurrentUser({ username: usernameRef.current.value });
         navigate('/');
         toast({
           title: 'Logged in.',
@@ -105,7 +104,15 @@ export default function Login() {
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input ref={passwordRef} type="password" />
+                <Input
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                      loginButtonClick();
+                    }
+                  }}
+                  ref={passwordRef}
+                  type="password"
+                />
               </FormControl>
               <Stack spacing={10}>
                 <Stack

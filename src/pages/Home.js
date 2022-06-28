@@ -42,7 +42,7 @@ export default function Home() {
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-              The project is aimed to enhance teachers and students connectivty
+              The project is aimed to enhance teachers and students connectivity
               and improves the learning experience.
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
