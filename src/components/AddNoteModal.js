@@ -35,6 +35,10 @@ const AddNoteModal = () => {
   const [role, setrole] = useState(localStorage.getItem('role'));
 
   const onClickaddClass = async () => {
+    if (bodyRef.current.value === '' || titleRef.current.value === '') {
+      setError('please make sure all field are filled');
+      return;
+    }
     try {
       const request = await fetch('/api/v1/note', {
         headers: {
