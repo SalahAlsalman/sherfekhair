@@ -13,7 +13,7 @@ import {
 import ClassImage from '../img/classImage.jpg';
 import { useNavigate } from 'react-router-dom';
 
-export default function SessionCard({ id }) {
+export default function SessionCard({ index,id }) {
   const navigate = useNavigate();
   const onGoClick = () => {
     return navigate(`/session/${id}`);
@@ -49,7 +49,7 @@ export default function SessionCard({ id }) {
           }}
         />
         <Heading fontSize={'2xl'} fontFamily={'body'}>
-          Session: {id}
+          Session: {index+1}
         </Heading>
 
         <Stack mt={8} direction={'row'} spacing={4}>

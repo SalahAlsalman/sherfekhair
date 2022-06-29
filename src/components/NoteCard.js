@@ -18,13 +18,15 @@ import {
   ModalBody,
   ModalCloseButton,
   HStack,
+  VStack,
   extendTheme,
   ChakraProvider,
+  Flex,
 } from '@chakra-ui/react';
 import ClassImage from '../img/classImage.jpg';
 import { useNavigate } from 'react-router-dom';
 import Comment from './Comment';
-import {  useState } from 'react';
+import { useState } from 'react';
 import Reply from './Reply';
 
 export default function NoteCard({
@@ -55,7 +57,7 @@ export default function NoteCard({
   const navigate = useNavigate();
   const [showReply, setShowReply] = useState(false);
   const onReplyClicked = async () => {
-    if (showReply) {
+    if (showReply && message.length !== 0) {
       const request = await fetch('/api/v1/comment', {
         headers: {
           'content-type': 'application/json',
@@ -64,7 +66,7 @@ export default function NoteCard({
         body: JSON.stringify({ message, note_id: id }),
       });
       const data = await request.json();
-      window.location.reload(false)
+      window.location.reload(false);
     }
     setShowReply(!showReply);
   };
@@ -161,14 +163,16 @@ export default function NoteCard({
             backdropFilter="blur(6px) hue-rotate(20deg)"
           />
           <ModalContent width="100%">
-            <ModalHeader>{title}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody px={0} pt={0} pb={6}>
+            <VStack align="left">
+              <ModalHeader>{title}</ModalHeader>
+              <ModalCloseButton />
               <HStack spacing={2} height={title.length * 5}>
                 <Text m={5}>{body}</Text>
               </HStack>
+            </VStack>
+            <ModalBody px={0} pt={0} pb={6}>
               {comments.length > 0 ? (
-                <Grid templateColumns="repeat(1, 1fr)" gap={6}>
+                <Grid templateColumns="repeat(1, 1fr)" gap={1}>
                   {comments.map((comment, index) => {
                     return (
                       <GridItem key={index} w="100%" h="100%">

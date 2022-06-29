@@ -36,7 +36,7 @@ const MyClass = () => {
             {sessions.map((session, index) => {
               return (
                 <GridItem key={index} w="100%" h="100%">
-                  <SessionCard key={index} id={session.id} />
+                  <SessionCard key={index} index={index} id={session.id} />
                 </GridItem>
               );
             })}

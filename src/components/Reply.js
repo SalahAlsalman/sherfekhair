@@ -16,10 +16,11 @@ const Reply = ({message,setMessage}) => {
     <Box
       bg={useColorModeValue('gray.100', 'blackAlpha.400')}
       borderRadius={10}
-      mx={10}
+      mx={3}
+      mt={3}
       borderColor="white"
       borderTop={4}
-      p={5}
+      p={6}
     >
       <FormControl>
         

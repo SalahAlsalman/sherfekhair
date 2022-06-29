@@ -17,6 +17,8 @@ const Comment = ({ message, messageDate, username }) => {
       <Box
         w={'full'}
         bg={useColorModeValue('white', 'gray.900')}
+        borderRadius={10}
+        mx={3} 
         boxShadow={'2xl'}
         p={6}
         textAlign={'center'}
