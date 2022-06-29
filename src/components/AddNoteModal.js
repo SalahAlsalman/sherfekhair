@@ -74,12 +74,11 @@ const AddNoteModal = () => {
         </Button>
       )}
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay backdropFilter="blur(6px) hue-rotate(20deg)"/>
         <ModalContent>
           <ModalHeader>Add Note</ModalHeader>
           <ModalCloseButton />
           <ModalBody
-            bg={useColorModeValue('gray.100', 'blackAlpha.400')}
             py={5}
           >
             <FormControl>
@@ -87,8 +86,8 @@ const AddNoteModal = () => {
               <Input my={3} ref={titleRef} placeholder="Title" />
             </FormControl>
             <FormControl>
-              <FormLabel>body</FormLabel>
-              <Textarea my={3} ref={bodyRef} placeholder="your note" />
+              <FormLabel>Note</FormLabel>
+              <Textarea resize={'none'} rows={5} my={3} ref={bodyRef} placeholder="Your note" />
             </FormControl>
             {error && (
               <Alert status="error" mt={5} borderRadius={5}>

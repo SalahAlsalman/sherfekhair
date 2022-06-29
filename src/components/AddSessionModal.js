@@ -62,7 +62,7 @@ const AddSessionModal = () => {
         </Button>
       )}
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay backdropFilter="blur(6px) hue-rotate(20deg)"/>
         <ModalContent>
           <ModalHeader>Add Class</ModalHeader>
           <ModalCloseButton />

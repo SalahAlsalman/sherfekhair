@@ -329,7 +329,7 @@ const NAV_ITEMS_LOGGED_IN = [
   },
   {
     label: 'Contact us',
-    href: '#',
+    href: '/contact',
   },
   {
     label: 'FAQ',

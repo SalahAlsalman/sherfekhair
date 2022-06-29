@@ -19,9 +19,7 @@ import {
   ModalCloseButton,
   HStack,
   VStack,
-  extendTheme,
-  ChakraProvider,
-  Flex,
+  Divider,
 } from '@chakra-ui/react';
 import ClassImage from '../img/classImage.jpg';
 import { useNavigate } from 'react-router-dom';
@@ -38,21 +36,7 @@ export default function NoteCard({
   comments,
 }) {
   const [message, setMessage] = useState('');
-  const theme = extendTheme({
-    components: {
-      Modal: {
-        baseStyle: props => ({
-          dialog: {
-            maxWidth: ['95%', '95%', '75%'],
-            minWidth: ['95%', '95%', '75%'],
-          },
-        }),
-      },
-    },
-    config: {
-      initialColorMode: localStorage.getItem('chakra-ui-color-mode') || 'dark',
-    },
-  });
+  
 
   const navigate = useNavigate();
   const [showReply, setShowReply] = useState(false);
@@ -151,7 +135,6 @@ export default function NoteCard({
           </Stack>
         </Box>
       </Center>
-      <ChakraProvider theme={theme}>
         <Modal
           variant="wide"
           closeOnOverlayClick={false}
@@ -170,22 +153,26 @@ export default function NoteCard({
                 <Text m={5}>{body}</Text>
               </HStack>
             </VStack>
+
             <ModalBody px={0} pt={0} pb={6}>
               {comments.length > 0 ? (
-                <Grid templateColumns="repeat(1, 1fr)" gap={1}>
-                  {comments.map((comment, index) => {
-                    return (
-                      <GridItem key={index} w="100%" h="100%">
-                        <Comment
-                          key={index}
-                          message={comment.message}
-                          messageDate={comment.messageDate}
-                          username={comment.user.username}
-                        />
-                      </GridItem>
-                    );
-                  })}
-                </Grid>
+                <>
+                  <Divider mt={5} />
+                  <Grid templateColumns="repeat(1, 1fr)" gap={1}>
+                    {comments.map((comment, index) => {
+                      return (
+                        <GridItem key={index} w="100%" h="100%">
+                          <Comment
+                            key={index}
+                            message={comment.message}
+                            messageDate={comment.messageDate}
+                            username={comment.user.username}
+                          />
+                        </GridItem>
+                      );
+                    })}
+                  </Grid>
+                </>
               ) : (
                 <></>
               )}
@@ -200,7 +187,6 @@ export default function NoteCard({
             </ModalFooter>
           </ModalContent>
         </Modal>
-      </ChakraProvider>
     </>
   );
 }
