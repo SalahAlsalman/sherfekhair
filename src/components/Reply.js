@@ -1,38 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormLabel,
-  Text,
+  Box,
+  useColorModeValue,
   Textarea,
-  Input,
+  
   FormControl,
 } from '@chakra-ui/react';
 
-const Reply = ({}) => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+const Reply = ({message,setMessage}) => {
+  
+
+
   return (
-    <FormControl>
-      <FormLabel htmlFor="title" mb="8px">
-        Title:{' '}
-      </FormLabel>
-      <Input
-        id="title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-        placeholder="Enter title here"
-        size="sm"
-      />
-      <FormLabel htmlFor="body" mb="8px">
-        Body:
-      </FormLabel>
-      <Textarea
-        id="body"
-        value={body}
-        onChange={e => setBody(e.target.value)}
-        placeholder="Enter body here"
-        size="sm"
-      />
-    </FormControl>
+    <Box
+      bg={useColorModeValue('gray.100', 'blackAlpha.400')}
+      borderRadius={10}
+      mx={10}
+      borderColor="white"
+      borderTop={4}
+      p={5}
+    >
+      <FormControl>
+        
+        <FormLabel htmlFor="message" mb="8px">
+          Message:
+        </FormLabel>
+        <Textarea
+        my={3}
+          id="message"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          placeholder="Enter message here"
+          size="sm"
+          borderRadius={10}
+          rows={5}
+          resize='none'
+        />
+      </FormControl>
+    </Box>
   );
 };
 

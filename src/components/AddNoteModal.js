@@ -11,6 +11,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  useColorModeValue,
   AlertDescription,
   FormControl,
   FormLabel,
@@ -63,7 +64,7 @@ const AddNoteModal = () => {
 
   return (
     <>
-      {role === ('teacher' || 'student') && (
+      {(role === 'teacher' || role === 'student') && (
         <Button colorScheme="teal" size="lg" mt={4} onClick={onOpen}>
           Add Note
         </Button>
@@ -71,16 +72,19 @@ const AddNoteModal = () => {
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add Class</ModalHeader>
+          <ModalHeader>Add Note</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody
+            bg={useColorModeValue('gray.100', 'blackAlpha.400')}
+            py={5}
+          >
             <FormControl>
               <FormLabel>Title</FormLabel>
-              <Input ref={titleRef} placeholder="Title" />
+              <Input my={3} ref={titleRef} placeholder="Title" />
             </FormControl>
             <FormControl>
               <FormLabel>body</FormLabel>
-              <Textarea ref={bodyRef} placeholder="your note" />
+              <Textarea my={3} ref={bodyRef} placeholder="your note" />
             </FormControl>
             {error && (
               <Alert status="error" mt={5} borderRadius={5}>

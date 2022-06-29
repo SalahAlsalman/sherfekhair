@@ -6,8 +6,6 @@ import {
   Text,
   Stack,
   Button,
-  Link,
-  Badge,
   GridItem,
   Grid,
   useColorModeValue,
@@ -20,14 +18,13 @@ import {
   ModalBody,
   ModalCloseButton,
   HStack,
-  VStack,
   extendTheme,
   ChakraProvider,
 } from '@chakra-ui/react';
 import ClassImage from '../img/classImage.jpg';
 import { useNavigate } from 'react-router-dom';
 import Comment from './Comment';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import Reply from './Reply';
 
 export default function NoteCard({
@@ -38,6 +35,7 @@ export default function NoteCard({
   username,
   comments,
 }) {
+  const [message, setMessage] = useState('');
   const theme = extendTheme({
     components: {
       Modal: {
@@ -55,22 +53,31 @@ export default function NoteCard({
   });
 
   const navigate = useNavigate();
-  const [replyClicked, setReplyClicked] = useState(false);
-  const onReplyClicked = () => {
-    setReplyClicked(!replyClicked);
+  const [showReply, setShowReply] = useState(false);
+  const onReplyClicked = async () => {
+    if (showReply) {
+      const request = await fetch('/api/v1/comment', {
+        headers: {
+          'content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({ message, note_id: id }),
+      });
+      const data = await request.json();
+      window.location.reload(false)
+    }
+    setShowReply(!showReply);
   };
 
   const onCloseClicked = () => {
-    setReplyClicked(false);
+    setShowReply(false);
     onClose();
   };
 
   const onCloseButtonClick = () => {
-    setReplyClicked(false);
+    setShowReply(false);
     onClose();
   };
-
-  
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -113,12 +120,11 @@ export default function NoteCard({
             <Heading fontSize={'xl'} fontFamily={'body'}>
               {title}
             </Heading>
-            
           </HStack>
           <Text my={6}>{/\d{4}-\d{2}-\d{2}/.exec(messageDate)[0]}</Text>
-            <Text fontWeight={600} mb={4}>
-              Posted by: @{username}
-            </Text>
+          <Text fontWeight={600} mb={4}>
+            Posted by: @{username}
+          </Text>
 
           <Stack mt={8} direction={'row'} spacing={4}>
             <Button
@@ -179,7 +185,7 @@ export default function NoteCard({
               ) : (
                 <></>
               )}
-              {replyClicked ? <Reply /> : ''}
+              {showReply && <Reply message={message} setMessage={setMessage} />}
             </ModalBody>
 
             <ModalFooter>
