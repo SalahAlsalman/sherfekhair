@@ -17,7 +17,7 @@ import {
   AlertDescription,
   useToast,
 } from '@chakra-ui/react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
@@ -39,8 +39,8 @@ export default function Login() {
       setError('');
       setIsLoading(true);
       const response = await login(
-        usernameRef.current.value,
-        passwordRef.current.value
+        usernameRef.current.value.trim(),
+        passwordRef.current.value.trim()
       );
 
       if (response) {

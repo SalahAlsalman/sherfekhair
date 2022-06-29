@@ -49,10 +49,10 @@ export default function Signup() {
       setError('');
       setIsLoading(true);
       const response = await signup(
-        usernameRef.current.value,
-        emailRef.current.value,
-        passwordRef.current.value,
-        roleRef.current.value.toLowerCase()
+        usernameRef.current.value.trim(),
+        emailRef.current.value.trim(),
+        passwordRef.current.value.trim(),
+        roleRef.current.value.toLowerCase().trim()
       );
       if (response) {
         setIsLoading(false);

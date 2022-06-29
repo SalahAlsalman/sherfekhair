@@ -55,10 +55,13 @@ export function AuthProvider({ children }) {
     if (request.status === 200) {
       const data = await request.json();
       localStorage.setItem('username', username);
-      setCurrentUser({ username });
+      const role =  data.message[0].authority;
+      localStorage.setItem('role', role);
+      setCurrentUser({ username,role });
       return data;
     } else {
       localStorage.removeItem('username');
+      localStorage.removeItem('role');
       setCurrentUser(null);
     }
   };
@@ -66,7 +69,9 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       const request = await fetch('/api/v1/auth/logout');
-      await request.json();
+      localStorage.removeItem('username');
+        localStorage.removeItem('role');
+      const data =await request.json();
     } catch (error) {
       console.log(error);
     }
@@ -85,6 +90,7 @@ export function AuthProvider({ children }) {
         return;
       } else if (request.status === 401) {
         localStorage.removeItem('username');
+        localStorage.removeItem('role');
         setCurrentUser(null);
         setLoadingPage(false);
         return;

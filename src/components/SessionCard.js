@@ -70,7 +70,7 @@ export default function SessionCard({ id }) {
               bg: 'blue.500',
             }}
           >
-            Go to class
+            Go to session
           </Button>
         </Stack>
       </Box>

@@ -40,7 +40,6 @@ export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
 
   const logoutButtonClicked = async () => {
-    localStorage.removeItem('username');
     await logout();
     window.location.reload();
   };

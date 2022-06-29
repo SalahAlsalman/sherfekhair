@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NoteCard from '../components/NoteCard';
 import { Grid, HStack, GridItem } from '@chakra-ui/react';
-import NoSessions from '../components/NoSessions';
+
+import NoNotes from '../components/NoNotes';
 const Session = () => {
   const param = useParams();
   const [notes, setNotes] = useState([]);
@@ -43,7 +44,7 @@ const Session = () => {
           </Grid>
         </HStack>
       ) : (
-        <NoSessions />
+        <NoNotes />
       )}
     </>
   );

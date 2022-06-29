@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider, theme, Box } from '@chakra-ui/react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -20,20 +20,22 @@ function App() {
     <ChakraProvider theme={theme}>
       <AuthProvider>
         <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
-            <Route element={<RequireAuth />}>
-              <Route path="/myclasses" element={<MyClasses />} />
-              <Route path="/myclass/:id" element={<MyClass />} />
-              <Route path="/session/:id" element={<Session />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
+          <Box h="100vh">
+            <Navbar />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route element={<RequireAuth />}>
+                <Route path="/myclasses" element={<MyClasses />} />
+                <Route path="/myclass/:id" element={<MyClass />} />
+                <Route path="/session/:id" element={<Session />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </Box>
         </BrowserRouter>
       </AuthProvider>
     </ChakraProvider>
