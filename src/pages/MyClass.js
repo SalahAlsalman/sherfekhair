@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SessionCard from '../components/SessionCard';
-import { HStack, Grid, GridItem, Button } from '@chakra-ui/react';
+import { HStack, Grid, GridItem, Button, Box } from '@chakra-ui/react';
 import AddSessionModal from '../components/AddSessionModal';
 import NoSessions from '../components/NoSessions';
 
@@ -23,10 +23,16 @@ const MyClass = () => {
   }, []);
   return (
     <>
-      <AddSessionModal />
+      <Box mx={5}>
+        <AddSessionModal />
+      </Box>
       {sessions.length > 0 ? (
-        <HStack spacing={5} margin={5}>
-          <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        <HStack spacing={5} marginX={5}>
+          <Grid
+            templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)","repeat(3, 1fr)","repeat(4, 1fr)","repeat(5, 1fr)"]}
+            justifyContent='space-evenly'
+            gap={6}
+          >
             {sessions.map((session, index) => {
               return (
                 <GridItem key={index} w="100%" h="100%">

@@ -43,6 +43,13 @@ export default function Footer() {
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}
+      style={{
+        position: 'relative',
+        left: 0,
+        bottom: 0,
+        right: 0,
+        zIndex: 1030,
+      }}
     >
       <Container
         as={Stack}
@@ -52,13 +59,6 @@ export default function Footer() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
-        style={{
-          position: 'relative',
-          left: 0,
-          bottom: 0,
-          right: 0,
-        }}
-        display="inline-flex"
       >
         <Image width="64px" height="64px" src={Logo} alt={'Logo'} />
         <Text>

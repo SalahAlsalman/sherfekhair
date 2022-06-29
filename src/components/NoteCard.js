@@ -107,7 +107,7 @@ export default function NoteCard({
           <HStack
             w="full"
             alignItems="center"
-            justifyContent="left"
+            justifyContent="center"
             spacing={4}
           >
             <Heading fontSize={'xl'} fontFamily={'body'}>
