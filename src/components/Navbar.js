@@ -333,17 +333,17 @@ const NAV_ITEMS_LOGGED_IN = [
   },
   {
     label: 'FAQ',
-    href: '#',
+    href: '/faq',
   },
 ];
 
 const NAV_ITEMS_NO_LOGIN = [
   {
     label: 'Contact us',
-    href: '#',
+    href: '/contact',
   },
   {
     label: 'FAQ',
-    href: '#',
+    href: '/faq',
   },
 ];

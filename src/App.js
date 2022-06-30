@@ -15,6 +15,7 @@ import Session from './pages/Session';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 
 
 
@@ -43,6 +44,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/contact" element={<Contact/>} />
+              <Route path="/faq" element={<FAQ/>} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
