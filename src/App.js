@@ -17,8 +17,6 @@ import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 
-
-
 function App() {
   const theme = extendTheme({
     components: {
@@ -43,8 +41,8 @@ function App() {
             <Navbar />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact/>} />
-              <Route path="/faq" element={<FAQ/>} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
@@ -55,7 +53,7 @@ function App() {
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
-            <Footer />
+            {/* <Footer /> */}
           </Box>
         </BrowserRouter>
       </AuthProvider>

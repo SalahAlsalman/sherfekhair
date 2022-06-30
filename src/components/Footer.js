@@ -8,6 +8,7 @@ import {
   Text,
   useColorModeValue,
   VisuallyHidden,
+  Flex,
 } from '@chakra-ui/react';
 import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { ReactNode } from 'react';
@@ -38,13 +39,13 @@ const SocialButton = ({ children, label, href }) => {
   );
 };
 
-export default function Footer() {
+export default function Footer({ pos }) {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}
       style={{
-        position: 'relative',
+        position: pos ? pos : 'relative',
         left: 0,
         bottom: 0,
         right: 0,
@@ -60,10 +61,18 @@ export default function Footer() {
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
       >
-        <Image width="64px" height="64px" src={Logo} alt={'Logo'} />
-        <Text>
-          &copy; {new Date().getFullYear()} Made with ❤ Salah Al-Salman
-        </Text>
+        <Image
+          display={{ base: 'none', md: 'inline-flex' }}
+          width="64px"
+          height="64px"
+          src={Logo}
+          alt={'Logo'}
+        />
+        <Flex>
+          <Text fontSize="10px" alignSelf="center">&copy; {new Date().getFullYear()} </Text>
+          <Text ml={2}> Made with ♥ Salah Al-Salman</Text>
+        </Flex>
+
         <Stack direction={'row'} spacing={6}>
           <SocialButton
             label={'LinkedIn'}

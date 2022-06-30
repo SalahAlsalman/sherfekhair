@@ -2,6 +2,7 @@ import { Box, Container, Grid, GridItem, HStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import AddClassModal from '../components/AddClassModal';
 import ClassCard from '../components/ClassCard';
+import Footer from '../components/Footer';
 import NoClasses from '../components/NoClasses';
 
 const MyClasses = () => {
@@ -45,6 +46,7 @@ const MyClasses = () => {
       ) : (
         <NoClasses />
       )}
+      <Footer pos={'fixed'}/>
     </>
   );
 };

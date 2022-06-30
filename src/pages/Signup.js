@@ -11,7 +11,7 @@ import {
   Button,
   Heading,
   Text,
-  Spinner,
+  useToast,
   useColorModeValue,
   Link as ChakaraLink,
   Select,
@@ -24,8 +24,10 @@ import { useState, useRef } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Footer from '../components/Footer';
 
 export default function Signup() {
+  const toast = useToast();
   const usernameRef = useRef();
   const roleRef = useRef();
   const emailRef = useRef();
@@ -56,10 +58,21 @@ export default function Signup() {
       );
       if (response) {
         setIsLoading(false);
+        toast({
+          title: 'You have signed up successfully!',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
         return navigate('/');
       } else {
         setIsLoading(false);
-        return setError('failed to create account!');
+        return toast({
+          title: 'Make sure your data are correct!',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+        });
       }
     } catch (error) {
       setIsLoading(false);
@@ -179,6 +192,7 @@ export default function Signup() {
           </Box>
         </Stack>
       </Flex>
+      <Footer/>
     </>
   );
 }

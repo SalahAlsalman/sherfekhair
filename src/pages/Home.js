@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
@@ -72,6 +73,7 @@ export default function Home() {
           />
         </Flex>
       </Stack>
+      <Footer/>
     </>
   );
 }

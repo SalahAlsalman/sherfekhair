@@ -4,6 +4,7 @@ import SessionCard from '../components/SessionCard';
 import { HStack, Grid, GridItem, Button, Box } from '@chakra-ui/react';
 import AddSessionModal from '../components/AddSessionModal';
 import NoSessions from '../components/NoSessions';
+import Footer from '../components/Footer';
 
 const MyClass = () => {
   const param = useParams();
@@ -45,6 +46,7 @@ const MyClass = () => {
       ) : (
         <NoSessions />
       )}
+      <Footer pos={'fixed'}/>
     </>
   );
 };

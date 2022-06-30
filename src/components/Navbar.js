@@ -126,18 +126,14 @@ export default function Navbar() {
             direction={'row'}
             spacing={6}
           >
-            <Button
-              as={'a'}
-              fontSize={'sm'}
-              fontWeight={400}
-              variant={'link'}
-              href={'/login'}
-            >
-              Sign In
-            </Button>
+            <NavLink to="/login" >
+              <Button display={{ base: 'inline-flex', md: 'inline-flex' }} fontSize={'sm'}  fontWeight={400} variant={'ghost'}>
+                Sign In
+              </Button>
+            </NavLink>
             <NavLink to="/signup">
               <Button
-                display={{ base: 'none', md: 'inline-flex' }}
+                display={{ base: 'inline-flex', md: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
@@ -172,9 +168,9 @@ const DesktopNav = ({ currentUser }) => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <ChakaraLink
+              <NavLink
                 p={2}
-                href={navItem.href ?? '#'}
+                to={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -184,7 +180,7 @@ const DesktopNav = ({ currentUser }) => {
                 }}
               >
                 {navItem.label}
-              </ChakaraLink>
+              </NavLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -267,16 +263,12 @@ const MobileNavItem = ({ label, children, href }) => {
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
+      <NavLink to = {href ?? '#'} justify={'space-between'}
         py={2}
-        as={ChakaraLink}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
+        align={'left'}
         _hover={{
           textDecoration: 'none',
-        }}
-      >
+        }}>
         <Text
           fontWeight={600}
           color={useColorModeValue('gray.600', 'gray.200')}
@@ -292,7 +284,7 @@ const MobileNavItem = ({ label, children, href }) => {
             h={6}
           />
         )}
-      </Flex>
+      </NavLink>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
         <Stack

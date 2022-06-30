@@ -5,6 +5,7 @@ import { Grid, HStack, GridItem, Box } from '@chakra-ui/react';
 
 import NoNotes from '../components/NoNotes';
 import AddNoteModal from '../components/AddNoteModal';
+import Footer from '../components/Footer';
 const Session = () => {
   const param = useParams();
   const [notes, setNotes] = useState([]);
@@ -40,7 +41,7 @@ const Session = () => {
           >
             {notes.map((note, index) => {
               return (
-                <GridItem key={index} w="100%" h="100%">
+                <GridItem key={index} w="100%" h="400px">
                   <NoteCard
                     key={index}
                     id={note.id}
@@ -58,6 +59,7 @@ const Session = () => {
       ) : (
         <NoNotes />
       )}
+      <Footer pos={'fixed'}/>
     </>
   );
 };

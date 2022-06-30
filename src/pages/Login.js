@@ -20,6 +20,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import Footer from '../components/Footer';
 
 export default function Login() {
   const { login, currentUser } = useAuth();
@@ -57,6 +58,7 @@ export default function Login() {
         toast({
           title: 'username or password are not correct',
           status: 'error',
+          duration: 2000,
           isClosable: true,
         });
       }
@@ -156,6 +158,7 @@ export default function Login() {
           </Box>
         </Stack>
       </Flex>
+      <Footer/>
     </>
   );
 }
