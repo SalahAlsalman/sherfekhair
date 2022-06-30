@@ -55,9 +55,9 @@ export function AuthProvider({ children }) {
     if (request.status === 200) {
       const data = await request.json();
       localStorage.setItem('username', username);
-      const role =  data.message[0].authority;
+      const role = data.message[0].authority;
       localStorage.setItem('role', role);
-      setCurrentUser({ username,role });
+      setCurrentUser({ username, role });
       return data;
     } else {
       localStorage.removeItem('username');
@@ -70,8 +70,8 @@ export function AuthProvider({ children }) {
     try {
       const request = await fetch('/api/v1/auth/logout');
       localStorage.removeItem('username');
-        localStorage.removeItem('role');
-      const data =await request.json();
+      localStorage.removeItem('role');
+      const data = await request.json();
     } catch (error) {
       console.log(error);
     }

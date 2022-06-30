@@ -17,7 +17,7 @@ import {
   AlertDescription,
   useToast,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import Footer from '../components/Footer';
@@ -121,9 +121,9 @@ export default function Login() {
                   justify={'space-between'}
                 >
                   <Checkbox>Remember me</Checkbox>
-                  <ChakaraLink href="/forgotpassword" color={'blue.400'}>
+                  <Link to="/forgotpassword" color={'blue.400'}>
                     Forgot password?
-                  </ChakaraLink>
+                  </Link>
                 </Stack>
                 {isLoading ? (
                   <Button

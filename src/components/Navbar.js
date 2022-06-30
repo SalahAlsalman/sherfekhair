@@ -172,6 +172,7 @@ const DesktopNav = ({ currentUser }) => {
                 p={2}
                 to={navItem.href ?? '#'}
                 fontSize={'sm'}
+                textAlign="center"
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
