@@ -46,7 +46,7 @@ const MyClasses = () => {
       ) : (
         <NoClasses />
       )}
-      <Footer pos={'fixed'}/>
+      <Footer />
     </>
   );
 };

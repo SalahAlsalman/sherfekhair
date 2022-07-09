@@ -18,8 +18,9 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import { BsGithub, BsLinkedin, BsPerson, BsTwitter } from 'react-icons/bs';
-import { MdEmail, MdOutlineEmail } from 'react-icons/md';
+import {BsPerson} from 'react-icons/bs';
+import { FaGithub, FaLinkedin,  FaTwitter } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
 import Footer from '../components/Footer';
 
 const confetti = {
@@ -105,7 +106,7 @@ const Contact = () => {
                       variant="ghost"
                       size="lg"
                       fontSize="3xl"
-                      icon={<BsGithub />}
+                      icon={<FaGithub />}
                       _hover={{
                         bg: 'blue.500',
                         color: useColorModeValue('white', 'gray.700'),
@@ -119,7 +120,7 @@ const Contact = () => {
                       aria-label="twitter"
                       variant="ghost"
                       size="lg"
-                      icon={<BsTwitter size="28px" />}
+                      icon={<FaTwitter size="28px" />}
                       _hover={{
                         bg: 'blue.500',
                         color: useColorModeValue('white', 'gray.700'),
@@ -133,7 +134,7 @@ const Contact = () => {
                       aria-label="linkedin"
                       variant="ghost"
                       size="lg"
-                      icon={<BsLinkedin size="28px" />}
+                      icon={<FaLinkedin size="28px" />}
                       _hover={{
                         bg: 'blue.500',
                         color: useColorModeValue('white', 'gray.700'),
@@ -168,7 +169,6 @@ const Contact = () => {
                       <FormLabel>Email</FormLabel>
 
                       <InputGroup>
-                        <InputLeftElement children={<MdOutlineEmail />} />
                         <Input
                           type="email"
                           name="email"

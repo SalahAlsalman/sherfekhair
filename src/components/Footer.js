@@ -69,7 +69,9 @@ export default function Footer({ pos }) {
           alt={'Logo'}
         />
         <Flex>
-          <Text fontSize="10px" alignSelf="center">&copy; {new Date().getFullYear()} </Text>
+          <Text fontSize="10px" alignSelf="center">
+            &copy; {new Date().getFullYear()}{' '}
+          </Text>
           <Text ml={2}> Made with ♥ Salah Al-Salman</Text>
         </Flex>
 

@@ -59,7 +59,7 @@ const Session = () => {
       ) : (
         <NoNotes />
       )}
-      <Footer pos={'fixed'}/>
+      <Footer pos={'relative'} />
     </>
   );
 };
