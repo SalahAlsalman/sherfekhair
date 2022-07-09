@@ -45,7 +45,7 @@ export default function Footer({ pos }) {
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}
       style={{
-        position: pos ? pos : 'relative',
+        position: 'static',
         left: 0,
         bottom: 0,
         right: 0,
